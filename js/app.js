@@ -55,5 +55,9 @@ myApp.controller('ProductsCtrl', ['$scope','$firebaseArray', function($scope,$fi
             $scope.id=null;//limpiar el record actual
             $scope.editFormShow=false;//ocultar el formulario de edicion
         };
+        
+        $scope.deleteProduct=function(product){
+            $scope.products.$remove(product);
+        };
 
 }]);
