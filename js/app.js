@@ -31,5 +31,29 @@ myApp.controller('ProductsCtrl', ['$scope','$firebaseArray', function($scope,$fi
             });
             clearForm();
         };
+        
+        $scope.showProduct=function(product){
+            $scope.editFormShow=true;
+            $scope.addFormShow=false;
+            $scope.productName=product.productName;
+            $scope.productCode=product.productCode;
+            $scope.description=product.description;
+            $scope.price=product.price;
+            $scope.id=product.$id;
+            
+        };
+        
+        $scope.editFormSubmit=function(){
+            var id=$scope.id;
+            var record=$scope.products.$getRecord(id);
+            record.productName=$scope.productName;
+            record.ProductCode=$scope.productCode;
+            record.description=$scope.description;
+            record.price=$scope.price;
+            $scope.products.$save(record);
+            clearForm();//limpiar formulario de edicion
+            $scope.id=null;//limpiar el record actual
+            $scope.editFormShow=false;//ocultar el formulario de edicion
+        };
 
 }]);
